@@ -2,6 +2,7 @@
 path: "/question/19"
 docType: "Question"
 questionNumber: "19"
+needsColorPalette: "1"
 title: "What is your favourite childhood photo?  Explain the story around it."
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/19/sketch.js"

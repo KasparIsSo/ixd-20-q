@@ -146,7 +146,9 @@ function twoDigit(n) {
 
 class PlayPostTemplate extends React.Component {
   componentDidMount() {
+    // console.log(this.props.data.markdownRemark.frontmatter.needsColorPalette);
     let k = twoDigit(this.props.data.markdownRemark.frontmatter.questionNumber);
+    let t = this.props.data.markdownRemark.frontmatter.needsColorPalette;
     let script = document.createElement("script");
     script.src = withPrefix(`${k}/sketch.js`);
 
@@ -161,10 +163,25 @@ class PlayPostTemplate extends React.Component {
     p5Dom.src = withPrefix(`sketches/p5.dom.js`);
     p5Dom.onload = function() {
       console.log("p5 dom");
+      if (t == "0") {
+        document.body.appendChild(paletteScript);
+      } else {
+        document.body.appendChild(script);
+      }
+    };
+
+    let paletteScript = document.createElement("script");
+    paletteScript.src = withPrefix(`sketches/niceColorPalettes.js`);
+    paletteScript.onload = function() {
+      console.log("palettes");
       document.body.appendChild(script);
     };
 
     document.body.appendChild(p5Lib);
+
+    let evt = document.createEvent("Event");
+    evt.initEvent("load", false, false);
+    window.dispatchEvent(evt);
   }
 
   render() {
@@ -199,7 +216,7 @@ class PlayPostTemplate extends React.Component {
               </StatSection>
               <StatSection>
                 <StatTitle>GitHub</StatTitle>
-                {frontmatter.github}
+                <a href={frontmatter.github}>Source</a>
               </StatSection>
               <StatSection>
                 <StatTitle>Libraries</StatTitle>
@@ -236,6 +253,7 @@ export const pageQuery = graphql`
         libraries
         libraryLinks
         themes
+        needsColorPalette
       }
     }
   }

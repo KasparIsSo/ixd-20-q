@@ -1,14 +1,3 @@
-// // function setup() {
-// //   const displaySketch = document.getElementById('display-sketch')
-// //   canvasWidth = displaySketch.offsetWidth
-// //   createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
-// //     'display-sketch'
-// //   )
-// //   initSketch()
-// // }
-
-// function draw() {}
-
 let Balls = new Array();
 let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
 
@@ -85,7 +74,6 @@ class Ball {
   constructor() {
     this.dir = true;
     this.vel = 0;
-    // this.start = performance.now();
     this.x = 0;
     this.y = canvasHeight / 2;
     this.r = offset / 2;

@@ -2,6 +2,7 @@
 path: "/question/07"
 docType: "Question"
 questionNumber: "7"
+needsColorPalette: "1"
 title: "Before making a telephone call, do you ever rehearse what you are going to say? Why?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/07/sketch.js"

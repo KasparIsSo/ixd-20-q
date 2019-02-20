@@ -38,28 +38,28 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Layout = ({ children }) => (
-	<StaticQuery
-		query={graphql`
-			query SiteTitleQuery {
-				site {
-					siteMetadata {
-						title
-					}
-				}
-			}
-		`}
-		render={data => (
-			<>
-				<Header siteTitle={data.site.siteMetadata.title} />
-				<GlobalStyles />
-				{children}
-			</>
-		)}
-	/>
+  <StaticQuery
+    query={graphql`
+      query SiteTitleQuery {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+      }
+    `}
+    render={data => (
+      <>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <GlobalStyles />
+        {children}
+      </>
+    )}
+  />
 );
 
 Layout.propTypes = {
-	children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired
 };
 
 export default Layout;

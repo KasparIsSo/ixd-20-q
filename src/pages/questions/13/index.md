@@ -2,6 +2,7 @@
 path: "/question/13"
 docType: "Question"
 questionNumber: "13"
+needsColorPalette: "1"
 title: "What would your style tile look like?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/13/sketch.js"

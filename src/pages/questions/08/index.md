@@ -2,6 +2,7 @@
 path: "/question/08"
 docType: "Question"
 questionNumber: "8"
+needsColorPalette: "1"
 title: "What would constitute an “ideal” day for you?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/08/sketch.js"

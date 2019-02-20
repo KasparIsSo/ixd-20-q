@@ -1,121 +1,88 @@
-// // function setup() {
-// //   const displaySketch = document.getElementById('display-sketch')
-// //   canvasWidth = displaySketch.offsetWidth
-// //   createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
-// //     'display-sketch'
-// //   )
-// //   initSketch()
-// // }
-
-// function draw() {}
-
 let Balls = new Array();
-let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
+let travelDistace, offset, canvasWidth, canvasHeight;
 
-let leftSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-		canvasWidth = displaySketch.offsetWidth;
-		canvasHeight = displaySketch.offsetHeight;
-		canvasWidthHalf = displaySketch.offsetWidth * 0.5;
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+    initSketch(p);
+  };
 
-		let lCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		travelDistance = displaySketch.offsetWidth * 0.8;
-		offset = displaySketch.offsetWidth * 0.1;
-		lCanvas.parent("display-sketch");
-		initSketch();
-	};
+  p.draw = function() {
+    p.background(255);
 
-	p.draw = function() {
-		p.background(0);
+    Balls.forEach(ball => {
+      ball.display(p);
+      ball.update();
+      ball.isDead(p);
+    });
 
-		Balls.forEach(ball => {
-			ball.display(p);
-		});
-	};
+    p.fill(0);
+    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
+    p.ellipse(canvasWidth / 2, canvasHeight / 2, centerR);
+  };
 };
 
-let rightSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let s = new p5(sketch);
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-
-		let rCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		rCanvas.parent("display-sketch");
-		rCanvas.position(displaySketch.offsetWidth * 0.5, 0);
-	};
-
-	p.draw = function() {
-		p.background(255);
-
-		Balls.forEach(ball => {
-			ball.display(p, false);
-			ball.update();
-		});
-	};
-};
-
-let ls = new p5(leftSketch);
-let rs = new p5(rightSketch);
-
-function initSketch() {
-	Balls = new Array();
-	Balls.push(new Ball());
+function initSketch(p) {
+  Balls = new Array();
+  let ballAmount = 100;
+  for (let i = 0; i < ballAmount; i++) {
+    Balls.push(new Ball(p));
+  }
 }
 
-function ease(value, power = 2) {
-	// return 1 - Math.pow(1 - value, power);
-	return value < 0.5
-		? 2 * Math.pow(value, power)
-		: -1 + (4 - 2 * value) * value;
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }
 
 class Ball {
-	constructor() {
-		this.dir = true;
-		this.vel = 0;
-		// this.start = performance.now();
-		this.x = 0;
-		this.y = canvasHeight / 2;
-		this.r = offset / 2;
-		this.duration = 0;
-	}
+  constructor(p) {
+    this.startX = Math.random() * canvasWidth;
+    this.startY = Math.random() * canvasHeight;
+    this.x = this.startX;
+    this.y = this.startY;
+    this.r = Math.random() * 20;
+    this.currentDuration = 0;
+    this.duration = Math.floor(50 + Math.random() * 200);
+    this.opac = 0;
 
-	display(p, leftCanvas = true) {
-		if (leftCanvas) {
-			p.fill(255);
-			p.ellipse(this.x + offset, this.y, this.r, this.r);
-		} else {
-			p.fill(0);
-			p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-		}
-	}
+    this.dist = p.createVector(
+      canvasWidth / 2 - this.x,
+      canvasHeight / 2 - this.y
+    );
+  }
 
-	update() {
-		this.x = ease(this.duration / 100) * travelDistance;
-		this.dir ? this.duration++ : this.duration--;
+  display(p) {
+    if (this.opac <= 255) {
+      this.opac += 5;
+    }
+    p.fill(0, this.opac);
+    p.noStroke();
+    p.ellipse(this.x, this.y, this.r);
+  }
 
-		let scalar =
-			this.duration <= 50
-				? this.duration / 50
-				: Math.abs(this.duration - 100) / 50;
-		this.r = ((1 + scalar) * offset) / 2;
+  update() {
+    this.x =
+      this.startX + ease(this.currentDuration / this.duration) * this.dist.x;
+    this.y =
+      this.startY + ease(this.currentDuration / this.duration) * this.dist.y;
+    this.currentDuration++;
+  }
 
-		if (this.duration >= 100) {
-			this.dir = false;
-		} else if (this.duration < 0) {
-			this.dir = true;
-		}
-	}
+  isDead(p) {
+    if (this.currentDuration >= this.duration) {
+      let i = Balls.indexOf(this);
+      Balls.splice(i, 1);
+      Balls.push(new Ball(p));
+    }
+  }
 }

@@ -2,6 +2,7 @@
 path: "/question/05"
 docType: "Question"
 questionNumber: "5"
+needsColorPalette: "1"
 title: "Explain what a good life looks like to you."
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/05/sketch.js"

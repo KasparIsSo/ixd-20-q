@@ -2,12 +2,13 @@
 path: "/question/01"
 docType: "Question"
 questionNumber: "1"
+needsColorPalette: "1"
 title: "What is the difference between your bio and your story?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/01/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Oscillation, Multiple Canvases"
 ---
 
 I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.

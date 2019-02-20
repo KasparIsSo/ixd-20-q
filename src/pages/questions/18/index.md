@@ -2,6 +2,7 @@
 path: "/question/18"
 docType: "Question"
 questionNumber: "18"
+needsColorPalette: "1"
 title: "What is the question you’re most afraid to be asked in a job interview? How could you answer that question in a way that is authentic?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/18/sketch.js"

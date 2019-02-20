@@ -2,6 +2,7 @@
 path: "/question/10"
 docType: "Question"
 questionNumber: "10"
+needsColorPalette: "1"
 title: "Is there something that you’ve dreamed of do-ing for a long time? Why haven’t you done it?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/10/sketch.js"

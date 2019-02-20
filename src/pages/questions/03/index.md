@@ -2,6 +2,7 @@
 path: "/question/03"
 docType: "Question"
 questionNumber: "3"
+needsColorPalette: "0"
 title: "What are: three things you’re most worried about this term, two things you’re dealing with right now, and one thing you’re really excited about?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/03/sketch.js"

@@ -2,6 +2,7 @@
 path: "/question/11"
 docType: "Question"
 questionNumber: "11"
+needsColorPalette: "1"
 title: "What is the greatest accomplishment of your life so far?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/11/sketch.js"

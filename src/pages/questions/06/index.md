@@ -2,6 +2,7 @@
 path: "/question/06"
 docType: "Question"
 questionNumber: "6"
+needsColorPalette: "1"
 title: "Take five minutes and record yourself telling your life story in as much detail as possible. Transcribe the audio and include it here."
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/06/sketch.js"

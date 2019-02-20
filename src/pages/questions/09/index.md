@@ -2,6 +2,7 @@
 path: "/question/09"
 docType: "Question"
 questionNumber: "9"
+needsColorPalette: "1"
 title: "If you could wake up tomorrow having gained any one quality or ability, what would it be?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/09/sketch.js"

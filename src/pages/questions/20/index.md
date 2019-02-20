@@ -2,6 +2,7 @@
 path: "/question/20"
 docType: "Question"
 questionNumber: "20"
+needsColorPalette: "1"
 title: "What is your ‘why’?"
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/20/sketch.js"
