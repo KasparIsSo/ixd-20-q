@@ -146,8 +146,8 @@ function twoDigit(n) {
 
 class PlayPostTemplate extends React.Component {
   componentDidMount() {
-    // console.log(this.props.data.markdownRemark.frontmatter.needsColorPalette);
-    let k = twoDigit(this.props.data.markdownRemark.frontmatter.questionNumber);
+    let activeQ = this.props.data.markdownRemark.frontmatter.questionNumber;
+    let k = twoDigit(activeQ);
     let t = this.props.data.markdownRemark.frontmatter.needsColorPalette;
     let script = document.createElement("script");
     script.src = withPrefix(`${k}/sketch.js`);
@@ -155,8 +155,13 @@ class PlayPostTemplate extends React.Component {
     let p5Lib = document.createElement("script");
     p5Lib.src = withPrefix(`sketches/p5.min.js`);
     p5Lib.onload = function() {
-      console.log("p5");
-      document.body.appendChild(p5Dom);
+      if (!window.location.hash) {
+        window.location = window.location + "#loaded";
+        window.location.reload(true);
+      } else {
+        console.log("p5");
+        document.body.appendChild(p5Dom);
+      }
     };
 
     let p5Dom = document.createElement("script");
@@ -178,10 +183,18 @@ class PlayPostTemplate extends React.Component {
     };
 
     document.body.appendChild(p5Lib);
+    // console.log("test");
 
-    let evt = document.createEvent("Event");
-    evt.initEvent("load", false, false);
-    window.dispatchEvent(evt);
+    const navLinks = document.querySelector(".navLinks").childNodes;
+    // console.log(navLinks);
+    // for (let i = 0; i < navLinks.length; i++) {
+    //   console.log(navLinks[i]);
+    // }
+    navLinks.forEach(link => {
+      if (link.innerHTML == activeQ) {
+        link.classList.add("active");
+      }
+    });
   }
 
   render() {
@@ -193,10 +206,10 @@ class PlayPostTemplate extends React.Component {
     const title = "Q." + questionNumber;
 
     const prev = questionNumber - 1 <= 0 ? "Home" : questionNumber - 1;
-    const pLink = prev == "Home" ? "./" : "./question/" + twoDigit(prev);
+    const pLink = prev == "Home" ? "./" : "./question/" + twoDigit(prev) + "/";
 
     const next = questionNumber + 1 > 20 ? "Home" : questionNumber + 1;
-    const nLink = next == "Home" ? "./" : "./question/" + twoDigit(next);
+    const nLink = next == "Home" ? "./" : "./question/" + twoDigit(next) + "/";
 
     return (
       <Layout>

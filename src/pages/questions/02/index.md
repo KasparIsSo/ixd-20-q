@@ -8,7 +8,7 @@ date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/02/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Particles, Easing"
 ---
 
 I think it’s hard to ever say you don anything really well. I believe that measuring how good you are is relative, and you may be really good relative to one group of individuals but comparatively bad relative to another. There are exceptions to this of course in terms of competitions that have a definitive winner, but I’ll save that for another time.

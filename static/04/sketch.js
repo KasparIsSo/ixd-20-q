@@ -1,121 +1,144 @@
-// // function setup() {
-// //   const displaySketch = document.getElementById('display-sketch')
-// //   canvasWidth = displaySketch.offsetWidth
-// //   createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
-// //     'display-sketch'
-// //   )
-// //   initSketch()
-// // }
-
-// function draw() {}
-
 let Balls = new Array();
-let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
+let Particles = new Array();
+let travelDistace, canvasWidth, canvasHeight, forceDist, centerR;
+const colors = getColors(77);
+let flowDirection;
 
-let leftSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-		canvasWidth = displaySketch.offsetWidth;
-		canvasHeight = displaySketch.offsetHeight;
-		canvasWidthHalf = displaySketch.offsetWidth * 0.5;
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
 
-		let lCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		travelDistance = displaySketch.offsetWidth * 0.8;
-		offset = displaySketch.offsetWidth * 0.1;
-		lCanvas.parent("display-sketch");
-		initSketch();
-	};
+    flowDirection = p.createVector(canvasWidth, canvasHeight).setMag(1);
 
-	p.draw = function() {
-		p.background(0);
+    centerR = Math.min(canvasWidth * 0.2, canvasHeight * 0.2);
+    forceDist = Math.min(canvasWidth * 0.2, canvasHeight * 0.2);
+    initSketch(p, centerR);
+    p.background(colors[0]);
+  };
 
-		Balls.forEach(ball => {
-			ball.display(p);
-		});
-	};
+  p.draw = function() {
+    Particles.forEach(particle => {
+      particle.update(p);
+      particle.isDead(p);
+    });
+  };
 };
 
-let rightSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let s = new p5(sketch);
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
+function initSketch(p, cR) {
+  Balls = new Array();
+  const ballAmount = 3;
+  while (Balls.length < ballAmount) {
+    let overlapping = false;
 
-		let rCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		rCanvas.parent("display-sketch");
-		rCanvas.position(displaySketch.offsetWidth * 0.5, 0);
-	};
+    let x = cR + Math.floor(Math.random() * (canvasWidth - 2 * cR));
+    let y = cR + Math.floor(Math.random() * (canvasHeight - 2 * cR));
 
-	p.draw = function() {
-		p.background(255);
+    for (let j = 0; j < Balls.length; j++) {
+      let other = Balls[j];
+      let d = p.dist(x, y, other.x, other.y);
+      if (d < cR * 2) {
+        overlapping = true;
+      }
+    }
+    if (!overlapping) {
+      Balls.push(new Ball(p, 2, x, y, cR));
+    }
+  }
 
-		Balls.forEach(ball => {
-			ball.display(p, false);
-			ball.update();
-		});
-	};
-};
-
-let ls = new p5(leftSketch);
-let rs = new p5(rightSketch);
-
-function initSketch() {
-	Balls = new Array();
-	Balls.push(new Ball());
+  Particles = new Array();
+  const particleAmount = 300;
+  for (let i = 0; i < particleAmount; i++) {
+    addParticle(p, cR);
+  }
 }
 
-function ease(value, power = 2) {
-	// return 1 - Math.pow(1 - value, power);
-	return value < 0.5
-		? 2 * Math.pow(value, power)
-		: -1 + (4 - 2 * value) * value;
+function addParticle(p, cR) {
+  let x = Math.round(Math.random() * (canvasWidth * 0.5));
+  let y = Math.floor(Math.random() * canvasHeight);
+  Particles.push(new Particle(p, x, y));
+}
+
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }
 
 class Ball {
-	constructor() {
-		this.dir = true;
-		this.vel = 0;
-		// this.start = performance.now();
-		this.x = 0;
-		this.y = canvasHeight / 2;
-		this.r = offset / 2;
-		this.duration = 0;
-	}
+  constructor(p, i, x, y, cR) {
+    this.r = cR;
+    this.x = x;
+    this.y = y;
+    this.fill = colors[i];
+  }
 
-	display(p, leftCanvas = true) {
-		if (leftCanvas) {
-			p.fill(255);
-			p.ellipse(this.x + offset, this.y, this.r, this.r);
-		} else {
-			p.fill(0);
-			p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-		}
-	}
+  display(p) {
+    p.fill(this.fill);
+    p.noStroke();
+    p.ellipse(this.x, this.y, this.r);
+  }
+}
 
-	update() {
-		this.x = ease(this.duration / 100) * travelDistance;
-		this.dir ? this.duration++ : this.duration--;
+class Particle {
+  constructor(p, x, y) {
+    this.x = x;
+    this.endX =
+      Math.round(Math.random() * (canvasWidth * 0.5)) + canvasWidth * 0.5;
+    this.originalY = y;
+    this.y = this.originalY;
+    this.dir = p.createVector(1, 0);
 
-		let scalar =
-			this.duration <= 50
-				? this.duration / 50
-				: Math.abs(this.duration - 100) / 50;
-		this.r = ((1 + scalar) * offset) / 2;
+    this.originalDir = this.dir;
+  }
 
-		if (this.duration >= 100) {
-			this.dir = false;
-		} else if (this.duration < 0) {
-			this.dir = true;
-		}
-	}
+  display(p) {
+    p.noStroke();
+    p.ellipse(this.x, this.y, 1);
+  }
+
+  update(p) {
+    let opac = 1;
+    let closeToBall = false;
+    for (let j = 0; j < Balls.length; j++) {
+      let distFromBall = p.dist(this.x, this.y, Balls[j].x, Balls[j].y);
+      if (distFromBall <= forceDist) {
+        closeToBall = true;
+        if (this.x <= Balls[j].x) {
+          this.dir.x += (0.004 * (this.x - Balls[j].x)) / forceDist;
+          this.dir.y += (0.004 * (this.y - Balls[j].y)) / forceDist;
+        } else {
+          this.dir.x -= (0.004 * (this.x - Balls[j].x)) / forceDist;
+          this.dir.y -= (0.006 * (this.y - Balls[j].y)) / forceDist;
+        }
+        opac = Math.pow(distFromBall / forceDist, 3);
+      }
+    }
+    if (!closeToBall && this.dir.y != 0) {
+      this.dir.y -= this.dir.y * 0.01;
+    }
+    this.dir.setMag(1);
+    this.x += this.dir.x;
+    this.y += this.dir.y;
+    let c = p.color(colors[2]);
+    c._array[3] = opac;
+    p.fill(c);
+    this.display(p);
+  }
+
+  isDead(p) {
+    if (this.x > this.endX) {
+      let i = Particles.indexOf(this);
+      Particles.splice(i, 1);
+
+      addParticle(p, centerR);
+    }
+  }
 }

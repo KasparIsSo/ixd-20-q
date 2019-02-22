@@ -1,6 +1,10 @@
 let Balls = new Array();
 let travelDistace, offset, canvasWidth, canvasHeight;
-const colors = getColors();
+// let zzz = Math.floor(100 * Math.random());
+const colors = getColors(82);
+// console.log(zzz);
+// const colors = ["#E94E77", "#d68189", "#E94E77", "#c6e5d9", "#f4ead5"];
+// console.log(colors);
 
 let sketch = function(p) {
   p.setup = function() {

@@ -1,121 +1,108 @@
-// // function setup() {
-// //   const displaySketch = document.getElementById('display-sketch')
-// //   canvasWidth = displaySketch.offsetWidth
-// //   createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
-// //     'display-sketch'
-// //   )
-// //   initSketch()
-// // }
+let MorphingShapes = new Array();
+let travelDistace, offset, canvasWidth, canvasHeight;
+const colors = getColors(91);
+let morphingShapeAmount = 1;
 
-// function draw() {}
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
 
-let Balls = new Array();
-let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+    travelDistance = displaySketch.offsetWidth * 0.6;
+    offset = displaySketch.offsetWidth * 0.2;
 
-let leftSketch = function(p) {
-	let x = 100;
-	let y = 100;
+    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
+    initSketch(p, centerR);
+  };
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-		canvasWidth = displaySketch.offsetWidth;
-		canvasHeight = displaySketch.offsetHeight;
-		canvasWidthHalf = displaySketch.offsetWidth * 0.5;
+  p.draw = function() {
+    p.background(colors[4]);
 
-		let lCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		travelDistance = displaySketch.offsetWidth * 0.8;
-		offset = displaySketch.offsetWidth * 0.1;
-		lCanvas.parent("display-sketch");
-		initSketch();
-	};
-
-	p.draw = function() {
-		p.background(0);
-
-		Balls.forEach(ball => {
-			ball.display(p);
-		});
-	};
+    MorphingShapes.forEach(morphingShape => {
+      morphingShape.display(p);
+      morphingShape.update();
+    });
+  };
 };
 
-let rightSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let s = new p5(sketch);
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-
-		let rCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		rCanvas.parent("display-sketch");
-		rCanvas.position(displaySketch.offsetWidth * 0.5, 0);
-	};
-
-	p.draw = function() {
-		p.background(255);
-
-		Balls.forEach(ball => {
-			ball.display(p, false);
-			ball.update();
-		});
-	};
-};
-
-let ls = new p5(leftSketch);
-let rs = new p5(rightSketch);
-
-function initSketch() {
-	Balls = new Array();
-	Balls.push(new Ball());
+function initSketch(p) {
+  MorphingShapes = new Array();
+  for (let i = 0; i < morphingShapeAmount; i++) {
+    MorphingShapes.push(new MorphingShape(p));
+  }
 }
 
-function ease(value, power = 2) {
-	// return 1 - Math.pow(1 - value, power);
-	return value < 0.5
-		? 2 * Math.pow(value, power)
-		: -1 + (4 - 2 * value) * value;
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }
 
-class Ball {
-	constructor() {
-		this.dir = true;
-		this.vel = 0;
-		// this.start = performance.now();
-		this.x = 0;
-		this.y = canvasHeight / 2;
-		this.r = offset / 2;
-		this.duration = 0;
-	}
+class MorphingShape {
+  constructor(p) {
+    this.dir = true;
+    this.vel = 0;
+    this.x = 0;
+    this.y = canvasHeight / 2;
+    this.r = offset / 2;
+    this.startFill = p.color(colors[1]);
+    this.endFill = p.color(colors[0]);
+    this.duration = 150;
+    this.currentDuration = 0;
+    this.roundedEdge = this.r / 2;
+  }
 
-	display(p, leftCanvas = true) {
-		if (leftCanvas) {
-			p.fill(255);
-			p.ellipse(this.x + offset, this.y, this.r, this.r);
-		} else {
-			p.fill(0);
-			p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-		}
-	}
+  display(p) {
+    p.noStroke();
+    let roundedEdge = Math.abs(
+      (this.currentDuration / this.duration) * this.roundedEdge
+    );
 
-	update() {
-		this.x = ease(this.duration / 100) * travelDistance;
-		this.dir ? this.duration++ : this.duration--;
+    p.push();
+    p.translate(this.x + offset, this.y);
+    p.rotate(
+      this.dir
+        ? ease(this.currentDuration / this.duration) * Math.PI
+        : Math.PI -
+            ease(
+              Math.abs(this.currentDuration - this.duration) / this.duration
+            ) *
+              Math.PI
+    );
+    p.fill(
+      p.lerpColor(
+        this.startFill,
+        this.endFill,
+        this.dir
+          ? ease(this.currentDuration / this.duration)
+          : 1 -
+              ease(
+                Math.abs(this.currentDuration - this.duration) / this.duration
+              )
+      )
+    );
+    p.rect(0 - this.r / 2, 0 - this.r / 2, this.r, this.r, roundedEdge);
+    p.pop();
+  }
 
-		let scalar =
-			this.duration <= 50
-				? this.duration / 50
-				: Math.abs(this.duration - 100) / 50;
-		this.r = ((1 + scalar) * offset) / 2;
+  update() {
+    this.x = this.dir
+      ? ease(this.currentDuration / this.duration) * travelDistance
+      : travelDistance -
+        ease(Math.abs(this.currentDuration - this.duration) / this.duration) *
+          travelDistance;
+    this.dir ? this.currentDuration++ : this.currentDuration--;
 
-		if (this.duration >= 100) {
-			this.dir = false;
-		} else if (this.duration < 0) {
-			this.dir = true;
-		}
-	}
+    if (this.currentDuration >= this.duration) {
+      this.dir = false;
+    } else if (this.currentDuration < 0) {
+      this.dir = true;
+    }
+  }
 }
