@@ -2,7 +2,7 @@
 path: "/question/05"
 docType: "Question"
 questionNumber: "5"
-needsColorPalette: "1"
+needsColorPalette: "0"
 title: "Explain what a good life looks like to you."
 date: "2019-02-28"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/05/sketch.js"
@@ -11,12 +11,12 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
+A good life to me is happiness. It’s a combination of my work and my personal life, that being my family.
 
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
+Happiness in my work
 
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
+This is defined by being excited by the work that I do. It’s also the happiness I find from completing that work along with the joy from working with people at work. Happiness also extends to the logistical factors associated work, that being the location of the workplace, the flexibility of work environment, the financial compensation, as well as the intangibles of the workplace, such as the culture, the interpersonal relationships, and how much I feel valued.
 
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+Happiness in my family
+
+Family means the world to me. For my mom, sister, and brother to be healthy and happy would be fantastic. I envision myself getting married and starting a family, being given the opportunity to be a good father means a lot to me. Being able to provide for my family, even if they don’t need me to, is important to me.

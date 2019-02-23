@@ -1,121 +1,99 @@
-// // function setup() {
-// //   const displaySketch = document.getElementById('display-sketch')
-// //   canvasWidth = displaySketch.offsetWidth
-// //   createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
-// //     'display-sketch'
-// //   )
-// //   initSketch()
-// // }
+let Letters = new Array();
+let travelDistace,
+  canvasWidth,
+  canvasHeight,
+  innerWidth,
+  innerHeight,
+  letterAmount,
+  margin,
+  tile,
+  columns,
+  textSize;
+const colors = getColors(85);
+const intro =
+  "I started off poor. My parents had separated and my mom was left raising my sister and myself, alone with no one to turn to. She worked tirelessly to get us out of welfare. From balancing three jobs and raising us to eventually getting her real estate license, my mom’s hard work was reflected in my education. I went from a public school to an art school to a private school. Through this, I was able to gather a variety of perspectives, from being extremely poor to hanging out with very well off friends.";
 
-// function draw() {}
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
 
-let Balls = new Array();
-let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
 
-let leftSketch = function(p) {
-	let x = 100;
-	let y = 100;
+    letterAmount = intro.length;
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-		canvasWidth = displaySketch.offsetWidth;
-		canvasHeight = displaySketch.offsetHeight;
-		canvasWidthHalf = displaySketch.offsetWidth * 0.5;
+    margin = Math.min(canvasWidth, canvasHeight) * 0.2;
+    innerWidth = canvasWidth - 2 * margin;
+    innerHeight = canvasHeight - 2 * margin;
+    columns = 35;
+    tile = innerWidth / columns;
+    textSize = tile / 2.2;
+    initSketch(p);
+  };
 
-		let lCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		travelDistance = displaySketch.offsetWidth * 0.8;
-		offset = displaySketch.offsetWidth * 0.1;
-		lCanvas.parent("display-sketch");
-		initSketch();
-	};
+  p.draw = function() {
+    p.background(colors[4]);
 
-	p.draw = function() {
-		p.background(0);
-
-		Balls.forEach(ball => {
-			ball.display(p);
-		});
-	};
+    Letters.forEach(letter => {
+      letter.display(p);
+      letter.update();
+    });
+  };
 };
 
-let rightSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let s = new p5(sketch);
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-
-		let rCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		rCanvas.parent("display-sketch");
-		rCanvas.position(displaySketch.offsetWidth * 0.5, 0);
-	};
-
-	p.draw = function() {
-		p.background(255);
-
-		Balls.forEach(ball => {
-			ball.display(p, false);
-			ball.update();
-		});
-	};
-};
-
-let ls = new p5(leftSketch);
-let rs = new p5(rightSketch);
-
-function initSketch() {
-	Balls = new Array();
-	Balls.push(new Ball());
+function initSketch(p) {
+  Letter = new Array();
+  for (let i = 0; i < letterAmount; i++) {
+    let x = tile * (i % (columns + 1)) + margin;
+    let y = tile * Math.floor(i / (columns + 1)) + margin;
+    let n = Math.floor(4 * Math.random());
+    Letters.push(new Lett(p, intro[i], x, y, n));
+  }
 }
 
 function ease(value, power = 2) {
-	// return 1 - Math.pow(1 - value, power);
-	return value < 0.5
-		? 2 * Math.pow(value, power)
-		: -1 + (4 - 2 * value) * value;
+  return 1 - Math.pow(1 - value, power);
 }
 
-class Ball {
-	constructor() {
-		this.dir = true;
-		this.vel = 0;
-		// this.start = performance.now();
-		this.x = 0;
-		this.y = canvasHeight / 2;
-		this.r = offset / 2;
-		this.duration = 0;
-	}
+class Lett {
+  constructor(p, letter, x, y, n) {
+    this.l = letter;
+    this.x = x;
+    this.y = y;
+    this.n = p.color(colors[n]);
+    this.dir = Math.random() > 0.5 ? true : false;
+    this.opac = Math.floor(100 * Math.random()) / 100;
+  }
 
-	display(p, leftCanvas = true) {
-		if (leftCanvas) {
-			p.fill(255);
-			p.ellipse(this.x + offset, this.y, this.r, this.r);
-		} else {
-			p.fill(0);
-			p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-		}
-	}
+  display(p) {
+    p.push();
+    p.translate(this.x, this.y);
+    p.textAlign(p.CENTER, p.CENTER);
+    p.fill(this.n);
+    p.textSize(textSize);
+    p.text(this.l, 0, 0);
+    p.pop();
+  }
 
-	update() {
-		this.x = ease(this.duration / 100) * travelDistance;
-		this.dir ? this.duration++ : this.duration--;
+  update() {
+    if (this.opac >= 1) {
+      this.dir = false;
+    } else if (this.opac <= 0) {
+      this.dir = true;
+    }
 
-		let scalar =
-			this.duration <= 50
-				? this.duration / 50
-				: Math.abs(this.duration - 100) / 50;
-		this.r = ((1 + scalar) * offset) / 2;
-
-		if (this.duration >= 100) {
-			this.dir = false;
-		} else if (this.duration < 0) {
-			this.dir = true;
-		}
-	}
+    if (this.dir) {
+      this.opac += 0.01;
+    } else {
+      this.opac -= 0.01;
+    }
+    this.n._array[3] = this.opac;
+  }
 }

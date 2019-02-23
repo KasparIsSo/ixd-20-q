@@ -19,13 +19,26 @@ const NavContainer = styled.div`
   ${GRID.container}
 `;
 
-const Logo = styled.div`
+const Logo = styled(Link)`
   grid-column-start: 1;
+  grid-column-end: 4;
   ${TYPE.heading}
+  text-decoration: none;
 `;
 
 const NavLinksWrapper = styled.div`
   grid-column-start: 1;
+  grid-column-end: 13;
+
+  @media (max-width: ${BREAKPOINTS.tablet.large}) {
+    grid-column-start: 1;
+    grid-column-end: 8;
+  }
+
+  @media (max-width: ${BREAKPOINTS.mobile.large}) {
+    grid-column-start: 1;
+    grid-column-end: 5;
+  }
   > .active {
     border: solid 1px ${THEME.highlight.gold};
   }
@@ -33,7 +46,9 @@ const NavLinksWrapper = styled.div`
 
 const NavLink = styled(Link)`
   margin-right: 1rem;
-  padding: 0.25rem;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
   ${TYPE.body}
   font-weight: 700;
   text-decoration: none;
@@ -54,11 +69,11 @@ function generateLinks() {
   return links;
 }
 
-const Header = ({ siteTitle }, pro = "nav") => (
+const Header = () => (
   <Nav>
     <NavWrapper>
       <NavContainer>
-        <Logo>Kaspar | 20</Logo>
+        <Logo to="./">Kaspar | 20</Logo>
         <NavLinksWrapper className="navLinks">
           {generateLinks()}
         </NavLinksWrapper>
