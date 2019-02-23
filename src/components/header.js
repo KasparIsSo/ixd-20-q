@@ -28,7 +28,7 @@ const Logo = styled(Link)`
 
 const NavLinksWrapper = styled.div`
   grid-column-start: 1;
-  grid-column-end: 13;
+  grid-column-end: 11;
 
   @media (max-width: ${BREAKPOINTS.tablet.large}) {
     grid-column-start: 1;

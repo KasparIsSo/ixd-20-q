@@ -11,12 +11,8 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
+**What is the Big O Notation of this function?**
 
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
+As I transition into web development, I have constant imposter syndrome regarding my technical ability. Meeting other front end developers, I feel as if it is more common for them to have a computer science degree of some sort rather than not. As a result, I am worried of being asked technical computer science questions.
 
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
-
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+Web development is incredibly complex and is only getting more and more so. The front end of the web has its own back end, which means that calling yourself a web developer is not as simple as just being able to create the UI. With that being said, I would dread being asked more technical computer science questions while interviewing for a web developer position since my lack of knowledge may come off as wasting their time, while the job title is ambiguous by today’s standards.

@@ -11,12 +11,16 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
+**Diversity in Background**
 
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
+From growing up poor to going to a private school, I have had the privilege to live life with multiple financial perspectives. I believe this is invaluable when designing for digital products as the scalability of products often include multiple financial segments.
 
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
+**Tolerance for Ambiguity**
 
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+It’s impossible to know everything, but work still needs to be done. One of my strongest traits is being able to work in situations without perfect information. This involves leaving yourself with room to be flexible in the event that something comes up.
+
+**Appropriate Concession**
+
+I am not above admitting when I am wrong. I find that too often do people stick to their ideas simply because the idea is theirs. If someone can tell me why we should go with a certain idea and is making good points, I’ll be the first to let go of my idea.
+
+Combining these three factors, I believe this makes me a good candidate for any employer. I think it’s important to be able to see things through multiple lenses as problems are more complex than ever with us having access to more data than ever. Being able to admit that a solution is better than your own allows the team to move forward on projects.

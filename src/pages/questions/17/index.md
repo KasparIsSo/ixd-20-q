@@ -12,10 +12,13 @@ themes: "Oscillation"
 ---
 
 **fence**
+
 Working tirelessly on my thesis, I feel like it may be a suitable representation of who I am. I think about it constantly and am proud of my progress so far. By setting it as my online avatar, especially
 
 **kaspar so.**
+
 As my website’s branding, keeping it clean for freelance clients is important. Having my face would be inappropriate so having my website’s branding creates consistency.
 
 **Photo**
+
 For a more professional avatar, a photo of myself makes sense. Especially on social media platforms as being able to associate my face to my name is useful.

@@ -11,12 +11,4 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
-
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
-
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
-
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+I think transitioning from high school to university, I actually “reinvented” myself by accepting who I was as a person. Without going into too much detail, I went to a private school despite my family not having the financial means that one would normally think of when thinking about private school. While I am thankful to my parents for giving me that opportunity, it also meant that I often felt as an outcast. When I moved on to university, the vast amount of people that I met, along with the diversity of backgrounds that they had, made me feel more accepting towards my own self. In high school, I may have wanted to fit in and talk about things I knew nothing about just to be a part of the conversation. When I decided that it was okay to be me, I would admit that I knew nothing about that thing.

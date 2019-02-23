@@ -11,12 +11,6 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
+I would want to be less stressed. I believe I over value a lot of things and make allow them to cause me stress when in reality they may not be that big of a deal. I often feel drained from just thinking about the things I have to do, even though there may be nothing I could do at that moment.
 
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
-
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
-
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+I’ve tried meditation and other techniques, but it feels like I can’t shake the passive stress. I can’t help but feel that instead of doing these relaxation exercises, I could be checking off things on my to-do list. I know that the key to managing stress is to prioritize one’s mental health, but I think about how much time is left in school and how I just have to push through these final few months instead.

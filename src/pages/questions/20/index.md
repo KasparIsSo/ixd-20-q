@@ -11,12 +11,8 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
+My ‘why’ is my family. My mom raised my sister and myself alone, working her way out of poverty to create a more comfortable life for us. She was able to do this because people gave her opportunities and rewarded her hustle. The fact that she was able to come out from under makes me believe that anyone can. Through our transition from poor to middle-class, I started getting exposed to opportunities that I didn’t have before.
 
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
+I’ve always been taught to treat others the way you want to be treated. The idea of equality has many different interpretations, but I believe in equality of opportunity. If people didn’t give my mother chances while trying to get us out of government housing we would have never made it out. So who is giving poorer folks opportunities? And who is to say that certain opportunities should be limited to one’s social class or the amount of money in their bank account.
 
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
-
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+I believe that technology has the opportunity to be the great equalizer. By delivering services online as well as internet becoming more standard in homes, technology’s scalability means that virtually anyone can access a service. But it’s also about the service itself and whether or not that service creates opportunities for its users. From Uber to AirBnb to Shopify, I believe that letting people be their own boss is the same as giving people opportunities that reward them based on how much they want it.

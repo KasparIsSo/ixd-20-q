@@ -1,121 +1,116 @@
-// // function setup() {
-// //   const displaySketch = document.getElementById('display-sketch')
-// //   canvasWidth = displaySketch.offsetWidth
-// //   createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
-// //     'display-sketch'
-// //   )
-// //   initSketch()
-// // }
+let flow, initR;
+let particles = [];
+const tile = 50;
+let opac = 255;
+let canvasWidth;
 
-// function draw() {}
+function setup() {
+  const displaySketch = document.getElementById("display-sketch");
+  canvasWidth = displaySketch.offsetWidth;
+  createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
+    "display-sketch"
+  );
+  initSketch();
+}
 
-let Balls = new Array();
-let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
+function draw() {
+  particles.forEach(function(p) {
+    if (p.live) {
+      p.update();
+      p.isDead();
+    }
+  });
 
-let leftSketch = function(p) {
-	let x = 100;
-	let y = 100;
+  if (opac <= 0) {
+    particles = [];
+  }
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-		canvasWidth = displaySketch.offsetWidth;
-		canvasHeight = displaySketch.offsetHeight;
-		canvasWidthHalf = displaySketch.offsetWidth * 0.5;
+  noFill();
+  stroke(255, opac);
+  strokeWeight(0.2);
+  beginShape();
+  for (let i = 0; i < particles.length; i++) {
+    vertex(particles[i].x, particles[i].y);
+  }
+  endShape(CLOSE);
+  opac -= 0.3;
+}
 
-		let lCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		travelDistance = displaySketch.offsetWidth * 0.8;
-		offset = displaySketch.offsetWidth * 0.1;
-		lCanvas.parent("display-sketch");
-		initSketch();
-	};
+function flowfield() {
+  const xVec = Math.ceil(width / tile) + 2;
+  const yVec = Math.ceil(height / tile) + 2;
+  const step = 0.03;
+  let flowF = new Array(xVec);
 
-	p.draw = function() {
-		p.background(0);
+  for (let x = 0; x < xVec; x++) {
+    flowF[x] = new Array(yVec);
+    for (let y = 0; y < yVec; y++) {
+      let n = noise(x * step, y * step);
+      flowF[x][y] = createVector(cos(n * TWO_PI * 8), sin(n * TWO_PI * 8));
+    }
+  }
 
-		Balls.forEach(ball => {
-			ball.display(p);
-		});
-	};
-};
+  return flowF;
+}
 
-let rightSketch = function(p) {
-	let x = 100;
-	let y = 100;
+function addParticles() {
+  let count = 36;
+  for (let i = 0; i < count; i++) {
+    let x = cos((TWO_PI * i) / count);
+    let y = sin((TWO_PI * i) / count);
+    let pX = initR * x + width / 2;
+    let pY = initR * y + height / 2;
+    let vel = createVector(x, y).setMag(0.6);
+    particles.push(new Particle(pX, pY, vel));
+  }
+}
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
+class Particle {
+  constructor(x, y, vel) {
+    this.x = x;
+    this.y = y;
+    this.vel = vel;
+    this.live = true;
+  }
 
-		let rCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		rCanvas.parent("display-sketch");
-		rCanvas.position(displaySketch.offsetWidth * 0.5, 0);
-	};
+  update() {
+    let flowDir =
+      flow[Math.floor(this.x / tile) + 1][Math.floor(this.y / tile) + 1];
+    this.vel.add(flowDir.setMag(0.01)).setMag(0.6);
 
-	p.draw = function() {
-		p.background(255);
+    this.x += this.vel.x;
+    this.y += this.vel.y;
+  }
 
-		Balls.forEach(ball => {
-			ball.display(p, false);
-			ball.update();
-		});
-	};
-};
-
-let ls = new p5(leftSketch);
-let rs = new p5(rightSketch);
+  isDead() {
+    if (
+      this.x < -1 * tile ||
+      this.x > width + tile ||
+      this.y < -1 * tile ||
+      this.y > height + tile
+    ) {
+      this.live = false;
+    }
+  }
+}
 
 function initSketch() {
-	Balls = new Array();
-	Balls.push(new Ball());
+  initR = width / 10;
+
+  flow = flowfield();
+  particles = [];
+  opac = 255;
+  addParticles();
+  background(0);
 }
 
-function ease(value, power = 2) {
-	// return 1 - Math.pow(1 - value, power);
-	return value < 0.5
-		? 2 * Math.pow(value, power)
-		: -1 + (4 - 2 * value) * value;
-}
+windowResized = function() {
+  const displaySketch = document.getElementById("display-sketch");
+  if (canvasWidth != displaySketch.offsetWidth) {
+    canvasWidth = displaySketch.offsetWidth;
+    resizeCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight);
+    initSketch();
+  }
+};
 
-class Ball {
-	constructor() {
-		this.dir = true;
-		this.vel = 0;
-		// this.start = performance.now();
-		this.x = 0;
-		this.y = canvasHeight / 2;
-		this.r = offset / 2;
-		this.duration = 0;
-	}
-
-	display(p, leftCanvas = true) {
-		if (leftCanvas) {
-			p.fill(255);
-			p.ellipse(this.x + offset, this.y, this.r, this.r);
-		} else {
-			p.fill(0);
-			p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-		}
-	}
-
-	update() {
-		this.x = ease(this.duration / 100) * travelDistance;
-		this.dir ? this.duration++ : this.duration--;
-
-		let scalar =
-			this.duration <= 50
-				? this.duration / 50
-				: Math.abs(this.duration - 100) / 50;
-		this.r = ((1 + scalar) * offset) / 2;
-
-		if (this.duration >= 100) {
-			this.dir = false;
-		} else if (this.duration < 0) {
-			this.dir = true;
-		}
-	}
-}
+window.addEventListener("resize", windowResized);

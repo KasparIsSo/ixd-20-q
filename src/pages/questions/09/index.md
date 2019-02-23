@@ -11,12 +11,4 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
-
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
-
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
-
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+I would like to have more extensive computer science knowledge. I think that programming is unbelievable in terms of what it can now do, with artificial intelligence and the scalability of the web. However, it gets complex quickly and I often feel lost when just trying to understand one part. It would help in terms of my work and would help unlock a different way of thinking about problems. I believe that, as designers, we are taught to think in a creative and diverging way while computer science students are taught to think in a different manner, one that involves more critical thinking in terms of identifying and establishing quantitative parameters and starting from there.

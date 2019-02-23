@@ -11,12 +11,6 @@ libraryLinks: "https://p5js.org/"
 themes: "oscillation, multiple canvases"
 ---
 
-I view my bio as a professional representation of my life. I value highlighting past work experiences and projects for the bio on my website, LinkedIn, etc. while my story is more personal. In a way, my bio is the what while I see my story is the why. So while my bio may be written and outwardly facing, my story is told through conversation.
+An ideal day for me would be to wake up at a consistent time, go to a job that I find fulfilling, go home to my significant other (and any kids we may have), spend some time together, play some games, then head to bed. I think that I know what I like and what I’m good at, which is design/development and my family, and would want my day to revolve around that. Things that plague day-to-day, like bills, spam emails, running errands, checking social media, etc. are small disturbances that are actually quite annoying. Ideally, I would never be on social media and my phone would only be used in the case of emergencies as well as checking the news. However, with group projects and having to be reachable, I find myself on my phone more often than I would like.
 
-Bio:
-“I have spent my past summers as a frontend developer intern at Shopify, a web visuals developer at The Star, and an interaction designer at Feast Interactive.”
-
-Story:
-“Having had a background focused on microeconomics in my first degree, I was naturally drawn to marketing in for small businesses in my first internship. That transpired into understanding that marketing is really narrative building as I transitioned to The Star, Canada’s largest newspaper. I then capped off my summers while in college at Shopify, where I found purpose in helping develop marketing sites for a platform that put small businesses first.”
-
-I’ve been taught to keep the bio short and condenses as the places it normally goes are skimmed. Therefore, my strategy for bios is to keep it short while including key words that pop out when skimmed. If there is an interview or a meeting, then I go into my story to build more context.
+I highly value fun and purpose as they satisfy an outer and inner part of me respectively. If you’re able to achieve both, that is fantastic, like in the case of going out on a date with your significant other. The date itself is most likely fun while spending time together fulfills a deeper purpose to be closer to that person. Work with colleagues you like and are friends with is similar in terms of satisfying both fun and purpose as long as what you’re working on is meaningful.
