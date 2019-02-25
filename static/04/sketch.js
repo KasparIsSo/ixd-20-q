@@ -4,74 +4,6 @@ let travelDistace, canvasWidth, canvasHeight, forceDist, centerR;
 const colors = getColors(77);
 let flowDirection;
 
-let sketch = function(p) {
-  p.setup = function() {
-    const displaySketch = document.getElementById("display-sketch");
-    canvasWidth = displaySketch.offsetWidth;
-    canvasHeight = displaySketch.offsetHeight;
-
-    let lCanvas = p.createCanvas(
-      displaySketch.offsetWidth,
-      displaySketch.offsetHeight
-    );
-    lCanvas.parent("display-sketch");
-
-    flowDirection = p.createVector(canvasWidth, canvasHeight).setMag(1);
-
-    centerR = Math.min(canvasWidth * 0.2, canvasHeight * 0.2);
-    forceDist = Math.min(canvasWidth * 0.2, canvasHeight * 0.2);
-    initSketch(p, centerR);
-    p.background(colors[0]);
-  };
-
-  p.draw = function() {
-    Particles.forEach(particle => {
-      particle.update(p);
-      particle.isDead(p);
-    });
-  };
-};
-
-let s = new p5(sketch);
-
-function initSketch(p, cR) {
-  Balls = new Array();
-  const ballAmount = 3;
-  while (Balls.length < ballAmount) {
-    let overlapping = false;
-
-    let x = cR + Math.floor(Math.random() * (canvasWidth - 2 * cR));
-    let y = cR + Math.floor(Math.random() * (canvasHeight - 2 * cR));
-
-    for (let j = 0; j < Balls.length; j++) {
-      let other = Balls[j];
-      let d = p.dist(x, y, other.x, other.y);
-      if (d < cR * 2) {
-        overlapping = true;
-      }
-    }
-    if (!overlapping) {
-      Balls.push(new Ball(p, 2, x, y, cR));
-    }
-  }
-
-  Particles = new Array();
-  const particleAmount = 300;
-  for (let i = 0; i < particleAmount; i++) {
-    addParticle(p, cR);
-  }
-}
-
-function addParticle(p, cR) {
-  let x = Math.round(Math.random() * (canvasWidth * 0.5));
-  let y = Math.floor(Math.random() * canvasHeight);
-  Particles.push(new Particle(p, x, y));
-}
-
-function ease(value, power = 3) {
-  return 1 - Math.pow(1 - value, power);
-}
-
 class Ball {
   constructor(p, i, x, y, cR) {
     this.r = cR;
@@ -141,4 +73,72 @@ class Particle {
       addParticle(p, centerR);
     }
   }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+
+    flowDirection = p.createVector(canvasWidth, canvasHeight).setMag(1);
+
+    centerR = Math.min(canvasWidth * 0.2, canvasHeight * 0.2);
+    forceDist = Math.min(canvasWidth * 0.2, canvasHeight * 0.2);
+    initSketch(p, centerR);
+    p.background(colors[0]);
+  };
+
+  p.draw = function() {
+    Particles.forEach(particle => {
+      particle.update(p);
+      particle.isDead(p);
+    });
+  };
+};
+
+let s = new p5(sketch);
+
+function initSketch(p, cR) {
+  Balls = new Array();
+  const ballAmount = 3;
+  while (Balls.length < ballAmount) {
+    let overlapping = false;
+
+    let x = cR + Math.floor(Math.random() * (canvasWidth - 2 * cR));
+    let y = cR + Math.floor(Math.random() * (canvasHeight - 2 * cR));
+
+    for (let j = 0; j < Balls.length; j++) {
+      let other = Balls[j];
+      let d = p.dist(x, y, other.x, other.y);
+      if (d < cR * 2) {
+        overlapping = true;
+      }
+    }
+    if (!overlapping) {
+      Balls.push(new Ball(p, 2, x, y, cR));
+    }
+  }
+
+  Particles = new Array();
+  const particleAmount = 300;
+  for (let i = 0; i < particleAmount; i++) {
+    addParticle(p, cR);
+  }
+}
+
+function addParticle(p, cR) {
+  let x = Math.round(Math.random() * (canvasWidth * 0.5));
+  let y = Math.floor(Math.random() * canvasHeight);
+  Particles.push(new Particle(p, x, y));
+}
+
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }

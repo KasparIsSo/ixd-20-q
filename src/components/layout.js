@@ -1,33 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StaticQuery, graphql } from "gatsby";
+import { withPrefix, StaticQuery, graphql } from "gatsby";
 
 import { createGlobalStyle } from "styled-components";
 import Header from "./header";
 import "./layout.css";
 import THEME from "../style/theme";
+import GilroyBold from "../assets/fonts/Gilroy-Bold.woff";
+import GilroyMedium from "../assets/fonts/Gilroy-Medium.woff";
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: "Gilroy-Bold";
-    src: url("Gilroy-Bold.eot");
-    src: url("../assets/fonts/Gilroy-Bold.eot?#iefix") format("embedded-opentype"),
-         url("../assets/fonts/Gilroy-Bold.woff2") format("woff2"),
-         url("../assets/fonts/Gilroy-Bold.woff") format("woff"),
-         url("../assets/fonts/Gilroy-Bold.ttf") format("ttf"),
-         url("../assets/fonts/Gilroy-Bold.svg#Gilroy-Bold") format("svg");
+    font-family: 'Gilroy-Bold';
     font-style: normal;
+    src: local('Gilroy-Bold'), url(${GilroyBold}) format('woff');
   }
 
   @font-face {
-    font-family: "Gilroy-Medium";
-    src: url("Gilroy-Medium.eot");
-    src: url("../assets/fonts/Gilroy-Medium.eot?#iefix") format("embedded-opentype"),
-         url("../assets/fonts/Gilroy-Medium.woff2") format("woff2"),
-         url("../assets/fonts/Gilroy-Medium.woff") format("woff"),
-         url("../assets/fonts/Gilroy-Medium.ttf") format("ttf"),
-         url("../assets/fonts/Gilroy-Medium.svg#Gilroy-Medium") format("svg");
+    font-family: 'Gilroy-Medium';
     font-style: normal;
+    font-weight: 300;
+    src: local('Gilroy-Medium'), url(${GilroyMedium}) format('woff');
   }
 
   body {

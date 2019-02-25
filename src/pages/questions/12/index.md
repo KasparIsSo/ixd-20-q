@@ -2,13 +2,13 @@
 path: "/question/12"
 docType: "Question"
 questionNumber: "12"
-needsColorPalette: "1"
-title: "What, if anything, is too serious to be  joked about?"
-date: "2019-02-28"
+needsColorPalette: "0"
+title: "What, if anything, is too serious to be joked about?"
+date: "2019-02-22"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/12/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Particles, Decay, Easing"
 ---
 
 Nothing.

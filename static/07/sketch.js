@@ -3,50 +3,6 @@ let travelDistace, centerR, offset, canvasWidth, canvasHeight;
 const colors = getColors(17);
 let ballAmount = 12;
 
-let sketch = function(p) {
-  p.setup = function() {
-    const displaySketch = document.getElementById("display-sketch");
-    canvasWidth = displaySketch.offsetWidth;
-    canvasHeight = displaySketch.offsetHeight;
-
-    let lCanvas = p.createCanvas(
-      displaySketch.offsetWidth,
-      displaySketch.offsetHeight
-    );
-    lCanvas.parent("display-sketch");
-
-    centerR = Math.min(canvasWidth * 0.15, canvasHeight * 0.15);
-    initSketch(p, centerR);
-  };
-
-  p.draw = function() {
-    p.background(colors[2]);
-
-    Balls.forEach(ball => {
-      ball.display(p);
-      ball.update();
-    });
-  };
-};
-
-let s = new p5(sketch);
-
-function initSketch(p) {
-  Balls = new Array();
-  for (let i = 0; i < ballAmount; i++) {
-    let pulse = i % 2 == 1 ? true : false;
-    let x =
-      centerR * 2 * Math.sin((2 * Math.PI * i) / ballAmount) + canvasWidth / 2;
-    let y =
-      centerR * 2 * Math.cos((2 * Math.PI * i) / ballAmount) + canvasHeight / 2;
-    Balls.push(new Ball(p, i, x, y, pulse));
-  }
-}
-
-function ease(value, power = 2) {
-  return 1 - Math.pow(1 - value, power);
-}
-
 class Ball {
   constructor(p, i, x, y, pulse) {
     this.dir = pulse ? true : false;
@@ -94,4 +50,48 @@ class Ball {
     // this.r = (1 - ease(this.currentDuration / this.duration)) * this.startR;
     // this.rotate += Math.PI / this.duration;
   }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+
+    centerR = Math.min(canvasWidth * 0.15, canvasHeight * 0.15);
+    initSketch(p, centerR);
+  };
+
+  p.draw = function() {
+    p.background(colors[2]);
+
+    Balls.forEach(ball => {
+      ball.display(p);
+      ball.update();
+    });
+  };
+};
+
+let s = new p5(sketch);
+
+function initSketch(p) {
+  Balls = new Array();
+  for (let i = 0; i < ballAmount; i++) {
+    let pulse = i % 2 == 1 ? true : false;
+    let x =
+      centerR * 2 * Math.sin((2 * Math.PI * i) / ballAmount) + canvasWidth / 2;
+    let y =
+      centerR * 2 * Math.cos((2 * Math.PI * i) / ballAmount) + canvasHeight / 2;
+    Balls.push(new Ball(p, i, x, y, pulse));
+  }
+}
+
+function ease(value, power = 2) {
+  return 1 - Math.pow(1 - value, power);
 }

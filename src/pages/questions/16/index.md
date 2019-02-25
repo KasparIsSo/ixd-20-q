@@ -4,11 +4,11 @@ docType: "Question"
 questionNumber: "16"
 needsColorPalette: "0"
 title: "Employers and clients hire people not skills, and grad schools screen applicants looking for a good fit, not just good grades. Think of three things that when combined make you different from everyone else and put them into one sentence. "
-date: "2019-02-28"
+date: "2019-02-22"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/16/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Oscillation, Easing"
 ---
 
 **Diversity in Background**

@@ -4,6 +4,52 @@ let travelDistace, offset, canvasWidth, canvasHeight;
 const colors = getColors(67);
 let leavesAmount = 12;
 
+class Leaf {
+  constructor(id, centerX, centerY, color) {
+    this.x = canvasHeight * 0.5;
+    this.measure = canvasHeight * 0.1;
+    this.rotate = (id * Math.PI * 2) / leavesAmount;
+    this.strokeWeight = canvasHeight * 0.01;
+    this.centerX = centerX;
+    this.centerY = centerY;
+    this.color = color;
+  }
+
+  display(p) {
+    p.push();
+    p.translate(this.centerX, this.centerY);
+    p.rotate(this.rotate);
+    p.translate(this.x, 0);
+    p.beginShape();
+    p.noFill();
+    p.stroke(this.color);
+    p.strokeWeight(this.strokeWeight);
+    p.vertex(0, 0);
+    p.bezierVertex(
+      this.measure,
+      -1.5 * this.measure,
+      2 * this.measure,
+      -1.5 * this.measure,
+      4 * this.measure,
+      0
+    );
+    p.bezierVertex(
+      2 * this.measure,
+      1.5 * this.measure,
+      this.measure,
+      1.5 * this.measure,
+      0,
+      0
+    );
+    p.endShape();
+    p.pop();
+  }
+
+  update() {
+    this.rotate += Math.PI / 360;
+  }
+}
+
 let sketch = function(p) {
   p.setup = function() {
     const displaySketch = document.getElementById("display-sketch");
@@ -51,50 +97,4 @@ function initSketch(p) {
 
 function ease(value, power = 3) {
   return 1 - Math.pow(1 - value, power);
-}
-
-class Leaf {
-  constructor(id, centerX, centerY, color) {
-    this.x = canvasHeight * 0.5;
-    this.measure = canvasHeight * 0.1;
-    this.rotate = (id * Math.PI * 2) / leavesAmount;
-    this.strokeWeight = canvasHeight * 0.01;
-    this.centerX = centerX;
-    this.centerY = centerY;
-    this.color = color;
-  }
-
-  display(p) {
-    p.push();
-    p.translate(this.centerX, this.centerY);
-    p.rotate(this.rotate);
-    p.translate(this.x, 0);
-    p.beginShape();
-    p.noFill();
-    p.stroke(this.color);
-    p.strokeWeight(this.strokeWeight);
-    p.vertex(0, 0);
-    p.bezierVertex(
-      this.measure,
-      -1.5 * this.measure,
-      2 * this.measure,
-      -1.5 * this.measure,
-      4 * this.measure,
-      0
-    );
-    p.bezierVertex(
-      2 * this.measure,
-      1.5 * this.measure,
-      this.measure,
-      1.5 * this.measure,
-      0,
-      0
-    );
-    p.endShape();
-    p.pop();
-  }
-
-  update() {
-    this.rotate += Math.PI / 360;
-  }
 }

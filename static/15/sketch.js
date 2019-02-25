@@ -3,47 +3,6 @@ let travelDistace, offset, canvasWidth, canvasHeight;
 const colors = getColors(91);
 let morphingShapeAmount = 1;
 
-let sketch = function(p) {
-  p.setup = function() {
-    const displaySketch = document.getElementById("display-sketch");
-    canvasWidth = displaySketch.offsetWidth;
-    canvasHeight = displaySketch.offsetHeight;
-
-    let lCanvas = p.createCanvas(
-      displaySketch.offsetWidth,
-      displaySketch.offsetHeight
-    );
-    lCanvas.parent("display-sketch");
-    travelDistance = displaySketch.offsetWidth * 0.6;
-    offset = displaySketch.offsetWidth * 0.2;
-
-    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
-    initSketch(p, centerR);
-  };
-
-  p.draw = function() {
-    p.background(colors[4]);
-
-    MorphingShapes.forEach(morphingShape => {
-      morphingShape.display(p);
-      morphingShape.update();
-    });
-  };
-};
-
-let s = new p5(sketch);
-
-function initSketch(p) {
-  MorphingShapes = new Array();
-  for (let i = 0; i < morphingShapeAmount; i++) {
-    MorphingShapes.push(new MorphingShape(p));
-  }
-}
-
-function ease(value, power = 3) {
-  return 1 - Math.pow(1 - value, power);
-}
-
 class MorphingShape {
   constructor(p) {
     this.dir = true;
@@ -105,4 +64,45 @@ class MorphingShape {
       this.dir = true;
     }
   }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+    travelDistance = displaySketch.offsetWidth * 0.6;
+    offset = displaySketch.offsetWidth * 0.2;
+
+    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
+    initSketch(p, centerR);
+  };
+
+  p.draw = function() {
+    p.background(colors[4]);
+
+    MorphingShapes.forEach(morphingShape => {
+      morphingShape.display(p);
+      morphingShape.update();
+    });
+  };
+};
+
+let s = new p5(sketch);
+
+function initSketch(p) {
+  MorphingShapes = new Array();
+  for (let i = 0; i < morphingShapeAmount; i++) {
+    MorphingShapes.push(new MorphingShape(p));
+  }
+}
+
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }

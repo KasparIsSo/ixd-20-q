@@ -1,49 +1,6 @@
 let Balls = new Array();
 let travelDistace, offset, canvasWidth, canvasHeight;
 
-let sketch = function(p) {
-  p.setup = function() {
-    const displaySketch = document.getElementById("display-sketch");
-    canvasWidth = displaySketch.offsetWidth;
-    canvasHeight = displaySketch.offsetHeight;
-
-    let lCanvas = p.createCanvas(
-      displaySketch.offsetWidth,
-      displaySketch.offsetHeight
-    );
-    lCanvas.parent("display-sketch");
-    initSketch(p);
-  };
-
-  p.draw = function() {
-    p.background(255);
-
-    Balls.forEach(ball => {
-      ball.display(p);
-      ball.update();
-      ball.isDead(p);
-    });
-
-    p.fill(0);
-    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
-    p.ellipse(canvasWidth / 2, canvasHeight / 2, centerR);
-  };
-};
-
-let s = new p5(sketch);
-
-function initSketch(p) {
-  Balls = new Array();
-  let ballAmount = 100;
-  for (let i = 0; i < ballAmount; i++) {
-    Balls.push(new Ball(p));
-  }
-}
-
-function ease(value, power = 3) {
-  return 1 - Math.pow(1 - value, power);
-}
-
 class Ball {
   constructor(p) {
     this.startX = Math.random() * canvasWidth;
@@ -85,4 +42,47 @@ class Ball {
       Balls.push(new Ball(p));
     }
   }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+    initSketch(p);
+  };
+
+  p.draw = function() {
+    p.background(255);
+
+    Balls.forEach(ball => {
+      ball.display(p);
+      ball.update();
+      ball.isDead(p);
+    });
+
+    p.fill(0);
+    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
+    p.ellipse(canvasWidth / 2, canvasHeight / 2, centerR);
+  };
+};
+
+let s = new p5(sketch);
+
+function initSketch(p) {
+  Balls = new Array();
+  let ballAmount = 100;
+  for (let i = 0; i < ballAmount; i++) {
+    Balls.push(new Ball(p));
+  }
+}
+
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }

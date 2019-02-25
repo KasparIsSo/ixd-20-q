@@ -2,15 +2,15 @@ import THEME from "./theme";
 import { BREAKPOINTS } from "./layout";
 
 const TYPE = {
-	display: `
-    font-family: Gilroy-Medium, sans-serif;
+  display: `
+    font-family: "Gilroy-Medium", sans-serif;
     font-size: 2.5rem;
     line-height: 3.125rem;
     font-weight: normal;
     color: ${THEME.white.true};
   `,
-	heading: `
-    font-family: Gilroy-Bold, sans-serif;
+  heading: `
+    font-family: "Gilroy-Bold", sans-serif;
     font-size: 1.25rem;
     line-height: 1.875rem;
     letter-spacing: 0.03rem;
@@ -21,8 +21,8 @@ const TYPE = {
       line-height: 1.5rem;
     }
   `,
-	headingLight: `
-    font-family: Gilroy-Medium, sans-serif;
+  headingLight: `
+    font-family: "Gilroy-Medium", sans-serif;
     font-size: 1.25rem;
     line-height: 1.875rem;
     letter-spacing: 0.03rem;
@@ -34,7 +34,7 @@ const TYPE = {
       line-height: 1.5rem;
     }
   `,
-	body: `
+  body: `
     font-family: Lato, sans-serif;
     font-size: .875rem;
     font-weight: 300;

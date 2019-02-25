@@ -2,13 +2,13 @@
 path: "/question/20"
 docType: "Question"
 questionNumber: "20"
-needsColorPalette: "1"
+needsColorPalette: "0"
 title: "What is your ‘why’?"
-date: "2019-02-28"
+date: "2019-02-22"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/20/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Particles, Easing"
 ---
 
 My ‘why’ is my family. My mom raised my sister and myself alone, working her way out of poverty to create a more comfortable life for us. She was able to do this because people gave her opportunities and rewarded her hustle. The fact that she was able to come out from under makes me believe that anyone can. Through our transition from poor to middle-class, I started getting exposed to opportunities that I didn’t have before.

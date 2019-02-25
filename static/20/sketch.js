@@ -1,56 +1,15 @@
 let Balls = new Array();
 let travelDistace, offset, canvasWidth, canvasHeight;
-
-let sketch = function(p) {
-  p.setup = function() {
-    const displaySketch = document.getElementById("display-sketch");
-    canvasWidth = displaySketch.offsetWidth;
-    canvasHeight = displaySketch.offsetHeight;
-
-    let lCanvas = p.createCanvas(
-      displaySketch.offsetWidth,
-      displaySketch.offsetHeight
-    );
-    lCanvas.parent("display-sketch");
-    initSketch(p);
-  };
-
-  p.draw = function() {
-    p.background(255);
-
-    Balls.forEach(ball => {
-      ball.display(p);
-      ball.update();
-      ball.isDead(p);
-    });
-
-    p.fill(0);
-    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
-    p.ellipse(canvasWidth / 2, canvasHeight / 2, centerR);
-  };
-};
-
-let s = new p5(sketch);
-
-function initSketch(p) {
-  Balls = new Array();
-  let ballAmount = 100;
-  for (let i = 0; i < ballAmount; i++) {
-    Balls.push(new Ball(p));
-  }
-}
-
-function ease(value, power = 3) {
-  return 1 - Math.pow(1 - value, power);
-}
+const colors = getColors();
 
 class Ball {
   constructor(p) {
+    this.c = p.color(colors[Math.floor(Math.random() * 4)]);
     this.startX = Math.random() * canvasWidth;
     this.startY = Math.random() * canvasHeight;
     this.x = this.startX;
     this.y = this.startY;
-    this.r = Math.random() * 20;
+    this.r = Math.random() * canvasWidth;
     this.currentDuration = 0;
     this.duration = Math.floor(50 + Math.random() * 200);
     this.opac = 0;
@@ -62,10 +21,11 @@ class Ball {
   }
 
   display(p) {
-    if (this.opac <= 255) {
-      this.opac += 5;
+    if (this.opac <= 1) {
+      this.opac += 0.02;
     }
-    p.fill(0, this.opac);
+    this.c._array[3] = this.opac;
+    p.fill(this.c);
     p.noStroke();
     p.ellipse(this.x, this.y, this.r);
   }
@@ -85,4 +45,43 @@ class Ball {
       Balls.push(new Ball(p));
     }
   }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+    initSketch(p);
+  };
+
+  p.draw = function() {
+    p.background(colors[4]);
+
+    Balls.forEach(ball => {
+      ball.display(p);
+      ball.update();
+      ball.isDead(p);
+    });
+  };
+};
+
+let s = new p5(sketch);
+
+function initSketch(p) {
+  Balls = new Array();
+  let ballAmount = 100;
+  for (let i = 0; i < ballAmount; i++) {
+    Balls.push(new Ball(p));
+  }
+}
+
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }

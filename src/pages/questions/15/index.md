@@ -4,11 +4,11 @@ docType: "Question"
 questionNumber: "15"
 needsColorPalette: "0"
 title: "If you could change one thing about yourself what would it be?"
-date: "2019-02-28"
+date: "2019-02-22"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/15/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Shape Manipulation"
 ---
 
 I would want to be less stressed. I believe I over value a lot of things and make allow them to cause me stress when in reality they may not be that big of a deal. I often feel drained from just thinking about the things I have to do, even though there may be nothing I could do at that moment.

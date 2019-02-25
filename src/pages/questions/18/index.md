@@ -4,11 +4,11 @@ docType: "Question"
 questionNumber: "18"
 needsColorPalette: "0"
 title: "What is the question you’re most afraid to be asked in a job interview? How could you answer that question in a way that is authentic?"
-date: "2019-02-28"
+date: "2019-02-22"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/18/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Particles, Decay, Easing"
 ---
 
 **What is the Big O Notation of this function?**

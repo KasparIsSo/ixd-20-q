@@ -1,8 +1,50 @@
 let Avatars = new Array();
-let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
+let travelDistance, offset, canvasWidth, canvasWidthHalf, canvasHeight;
 
 let images = new Array();
 let avatarAmount = 3;
+
+class Avatar {
+  constructor(i, maxI) {
+    this.dir = true;
+    this.vel = 0;
+    this.i = i;
+    this.r = offset / 2;
+    this.x = 0;
+    this.y = ((i + 1) * canvasHeight) / 4;
+    this.maxDuration = 180;
+    this.duration = (this.maxDuration * i) / maxI;
+  }
+
+  display(p) {
+    p.fill(255);
+    p.image(
+      images[this.i],
+      this.x + offset - this.r / 2,
+      this.y - this.r / 2,
+      this.r,
+      this.r
+    );
+  }
+
+  update() {
+    this.x = ease(this.duration / this.maxDuration) * travelDistance;
+    this.dir ? this.duration++ : this.duration--;
+
+    let scalar =
+      this.duration <= this.maxDuration / 2
+        ? (1.5 * this.duration) / (this.maxDuration / 2)
+        : (1.5 * Math.abs(this.duration - this.maxDuration)) /
+          (this.maxDuration / 2);
+    this.r = ((1 + scalar) * offset) / 2;
+
+    if (this.duration >= this.maxDuration) {
+      this.dir = false;
+    } else if (this.duration < 0) {
+      this.dir = true;
+    }
+  }
+}
 
 let sketch = function(p) {
   let x = 100;
@@ -52,48 +94,4 @@ function ease(value, power = 2) {
   return value < 0.5
     ? 2 * Math.pow(value, power)
     : -1 + (4 - 2 * value) * value;
-}
-
-class Avatar {
-  constructor(i, maxI) {
-    this.dir = true;
-    this.vel = 0;
-    this.i = i;
-    this.r = offset / 2;
-    this.x = 0;
-    this.y = ((i + 1) * canvasHeight) / 4;
-    this.maxDuration = 180;
-    this.duration = (this.maxDuration * i) / maxI;
-  }
-
-  display(p) {
-    p.fill(255);
-    // p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-    // p.rect(this.x + offset - this.r / 2, this.y - this.r / 2, this.r, this.r);
-    p.image(
-      images[this.i],
-      this.x + offset - this.r / 2,
-      this.y - this.r / 2,
-      this.r,
-      this.r
-    );
-  }
-
-  update() {
-    this.x = ease(this.duration / this.maxDuration) * travelDistance;
-    this.dir ? this.duration++ : this.duration--;
-
-    let scalar =
-      this.duration <= this.maxDuration / 2
-        ? (1.5 * this.duration) / (this.maxDuration / 2)
-        : (1.5 * Math.abs(this.duration - this.maxDuration)) /
-          (this.maxDuration / 2);
-    this.r = ((1 + scalar) * offset) / 2;
-
-    if (this.duration >= this.maxDuration) {
-      this.dir = false;
-    } else if (this.duration < 0) {
-      this.dir = true;
-    }
-  }
 }

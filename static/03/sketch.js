@@ -1,50 +1,6 @@
 let Balls = new Array();
 let travelDistace, offset, canvasWidth, canvasHeight;
-// let zzz = Math.floor(100 * Math.random());
 const colors = getColors(82);
-// console.log(zzz);
-// const colors = ["#E94E77", "#d68189", "#E94E77", "#c6e5d9", "#f4ead5"];
-// console.log(colors);
-
-let sketch = function(p) {
-  p.setup = function() {
-    const displaySketch = document.getElementById("display-sketch");
-    canvasWidth = displaySketch.offsetWidth;
-    canvasHeight = displaySketch.offsetHeight;
-
-    let lCanvas = p.createCanvas(
-      displaySketch.offsetWidth,
-      displaySketch.offsetHeight
-    );
-    lCanvas.parent("display-sketch");
-
-    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
-    initSketch(p, centerR);
-  };
-
-  p.draw = function() {
-    p.background(colors[0]);
-
-    Balls.forEach(ball => {
-      ball.display(p);
-      ball.update();
-    });
-  };
-};
-
-let s = new p5(sketch);
-
-function initSketch(p, cR) {
-  Balls = new Array();
-  let ballAmount = 6;
-  for (let i = 0; i < ballAmount; i++) {
-    Balls.push(new Ball(p, i, cR));
-  }
-}
-
-function ease(value, power = 3) {
-  return 1 - Math.pow(1 - value, power);
-}
 
 class Ball {
   constructor(p, id, cR) {
@@ -106,16 +62,45 @@ class Ball {
     }
 
     this.r = (1 - ease(this.currentDuration / this.duration)) * this.startR;
-
-    // update2() {
-    // 	this.x = ease(this.duration / 100) * travelDistance;
-    // 	this.dir ? this.duration++ : this.duration--;
-
-    // if (this.duration >= 100) {
-    // 	this.dir = false;
-    // } else if (this.duration < 0) {
-    // 	this.dir = true;
-    // }
-    // }
   }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+
+    let centerR = Math.min(canvasWidth * 0.3, canvasHeight * 0.3);
+    initSketch(p, centerR);
+  };
+
+  p.draw = function() {
+    p.background(colors[0]);
+
+    Balls.forEach(ball => {
+      ball.display(p);
+      ball.update();
+    });
+  };
+};
+
+let s = new p5(sketch);
+
+function initSketch(p, cR) {
+  Balls = new Array();
+  let ballAmount = 6;
+  for (let i = 0; i < ballAmount; i++) {
+    Balls.push(new Ball(p, i, cR));
+  }
+}
+
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }

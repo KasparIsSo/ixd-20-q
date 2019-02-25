@@ -4,11 +4,11 @@ docType: "Question"
 questionNumber: "5"
 needsColorPalette: "0"
 title: "Explain what a good life looks like to you."
-date: "2019-02-28"
+date: "2019-02-22"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/05/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Rotation, Offset"
 ---
 
 A good life to me is happiness. It’s a combination of my work and my personal life, that being my family.

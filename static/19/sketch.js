@@ -2,41 +2,6 @@ let Balls = new Array();
 let travelDistace, offset, canvasWidth, canvasHeight, sideVel, centerR;
 const colors = getColors(20);
 
-let sketch = function(p) {
-  p.setup = function() {
-    const displaySketch = document.getElementById("display-sketch");
-    canvasWidth = displaySketch.offsetWidth;
-    canvasHeight = displaySketch.offsetHeight;
-    sideVel = canvasWidth * 0.004;
-    centerR = canvasHeight * 0.02;
-
-    let lCanvas = p.createCanvas(
-      displaySketch.offsetWidth,
-      displaySketch.offsetHeight
-    );
-    lCanvas.parent("display-sketch");
-  };
-
-  p.draw = function() {
-    p.background(colors[4]);
-
-    if (Balls.length < 180) {
-      Balls.push(new Ball(p));
-    }
-
-    Balls.forEach(ball => {
-      ball.display(p);
-      ball.update(p);
-    });
-  };
-};
-
-let s = new p5(sketch);
-
-function ease(value, power = 3) {
-  return 1 - Math.pow(1 - value, power);
-}
-
 class Ball {
   constructor(p) {
     this.x = p.mouseX;
@@ -76,4 +41,39 @@ class Ball {
     Balls.push(new Ball(p));
     // }
   }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+    sideVel = canvasWidth * 0.004;
+    centerR = canvasHeight * 0.02;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    lCanvas.parent("display-sketch");
+  };
+
+  p.draw = function() {
+    p.background(colors[4]);
+
+    if (Balls.length < 180) {
+      Balls.push(new Ball(p));
+    }
+
+    Balls.forEach(ball => {
+      ball.display(p);
+      ball.update(p);
+    });
+  };
+};
+
+let s = new p5(sketch);
+
+function ease(value, power = 3) {
+  return 1 - Math.pow(1 - value, power);
 }

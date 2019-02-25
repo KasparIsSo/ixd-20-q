@@ -4,11 +4,11 @@ docType: "Question"
 questionNumber: "13"
 needsColorPalette: "1"
 title: "What would your style tile look like?"
-date: "2019-02-28"
+date: "2019-02-22"
 github: "https://github.com/KasparIsSo/ixd-20-q/blob/master/static/13/sketch.js"
 libraries: "p5.js"
 libraryLinks: "https://p5js.org/"
-themes: "oscillation, multiple canvases"
+themes: "Particles, Force"
 ---
 
 **Toronto Raptors**

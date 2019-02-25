@@ -1,121 +1,91 @@
-// // function setup() {
-// //   const displaySketch = document.getElementById('display-sketch')
-// //   canvasWidth = displaySketch.offsetWidth
-// //   createCanvas(displaySketch.offsetWidth, displaySketch.offsetHeight).parent(
-// //     'display-sketch'
-// //   )
-// //   initSketch()
-// // }
-
-// function draw() {}
-
 let Balls = new Array();
-let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
+let travelDistance, offset, canvasWidth, canvasHeight;
+const colors = getColors();
 
-let leftSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let ballAmount = 5;
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-		canvasWidth = displaySketch.offsetWidth;
-		canvasHeight = displaySketch.offsetHeight;
-		canvasWidthHalf = displaySketch.offsetWidth * 0.5;
+class Ball {
+  constructor(i, p) {
+    this.dir = true;
+    this.vel = 0;
+    this.i = i;
+    this.r = offset / 2;
+    this.x = offset + (i * (canvasWidth - 2 * offset)) / ballAmount;
+    this.c = p.lerpColor(
+      p.color(colors[0]),
+      p.color(colors[4]),
+      i / ballAmount
+    );
+    this.yDistance = (travelDistance * i) / ballAmount;
+    this.y = canvasHeight / 2;
+    this.maxDuration = 180;
+    this.duration = (this.maxDuration * i) / ballAmount;
+  }
 
-		let lCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		travelDistance = displaySketch.offsetWidth * 0.8;
-		offset = displaySketch.offsetWidth * 0.1;
-		lCanvas.parent("display-sketch");
-		initSketch();
-	};
+  display(p) {
+    p.noStroke();
+    p.fill(this.c);
+    p.ellipse(this.x, this.y, this.r, this.r);
+  }
 
-	p.draw = function() {
-		p.background(0);
+  update() {
+    this.y =
+      (ease(this.duration / this.maxDuration) - 0.5) * this.yDistance +
+      canvasHeight / 2;
+    this.dir ? this.duration++ : this.duration--;
 
-		Balls.forEach(ball => {
-			ball.display(p);
-		});
-	};
+    let scalar =
+      this.duration <= this.maxDuration / 2
+        ? (1.5 * this.duration) / (this.maxDuration / 2)
+        : (1.5 * Math.abs(this.duration - this.maxDuration)) /
+          (this.maxDuration / 2);
+    this.r = ((1 + scalar) * offset) / 2;
+
+    if (this.duration >= this.maxDuration) {
+      this.dir = false;
+    } else if (this.duration < 0) {
+      this.dir = true;
+    }
+  }
+}
+
+let sketch = function(p) {
+  p.setup = function() {
+    const displaySketch = document.getElementById("display-sketch");
+    canvasWidth = displaySketch.offsetWidth;
+    canvasHeight = displaySketch.offsetHeight;
+
+    let lCanvas = p.createCanvas(
+      displaySketch.offsetWidth,
+      displaySketch.offsetHeight
+    );
+    offset = Math.max(canvasWidth, canvasHeight) * 0.1;
+    travelDistance = canvasHeight - 2 * offset;
+    lCanvas.parent("display-sketch");
+    initSketch(p);
+  };
+
+  p.draw = function() {
+    p.background(colors[2]);
+
+    Balls.forEach(ball => {
+      ball.display(p);
+      ball.update();
+    });
+  };
 };
 
-let rightSketch = function(p) {
-	let x = 100;
-	let y = 100;
+let s = new p5(sketch);
 
-	p.setup = function() {
-		const displaySketch = document.getElementById("display-sketch");
-
-		let rCanvas = p.createCanvas(
-			displaySketch.offsetWidth * 0.5,
-			displaySketch.offsetHeight
-		);
-		rCanvas.parent("display-sketch");
-		rCanvas.position(displaySketch.offsetWidth * 0.5, 0);
-	};
-
-	p.draw = function() {
-		p.background(255);
-
-		Balls.forEach(ball => {
-			ball.display(p, false);
-			ball.update();
-		});
-	};
-};
-
-let ls = new p5(leftSketch);
-let rs = new p5(rightSketch);
-
-function initSketch() {
-	Balls = new Array();
-	Balls.push(new Ball());
+function initSketch(p) {
+  Balls = new Array();
+  for (let i = 0; i < ballAmount + 1; i++) {
+    Balls.push(new Ball(i, p));
+  }
 }
 
 function ease(value, power = 2) {
-	// return 1 - Math.pow(1 - value, power);
-	return value < 0.5
-		? 2 * Math.pow(value, power)
-		: -1 + (4 - 2 * value) * value;
-}
-
-class Ball {
-	constructor() {
-		this.dir = true;
-		this.vel = 0;
-		// this.start = performance.now();
-		this.x = 0;
-		this.y = canvasHeight / 2;
-		this.r = offset / 2;
-		this.duration = 0;
-	}
-
-	display(p, leftCanvas = true) {
-		if (leftCanvas) {
-			p.fill(255);
-			p.ellipse(this.x + offset, this.y, this.r, this.r);
-		} else {
-			p.fill(0);
-			p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-		}
-	}
-
-	update() {
-		this.x = ease(this.duration / 100) * travelDistance;
-		this.dir ? this.duration++ : this.duration--;
-
-		let scalar =
-			this.duration <= 50
-				? this.duration / 50
-				: Math.abs(this.duration - 100) / 50;
-		this.r = ((1 + scalar) * offset) / 2;
-
-		if (this.duration >= 100) {
-			this.dir = false;
-		} else if (this.duration < 0) {
-			this.dir = true;
-		}
-	}
+  return value < 0.5
+    ? 2 * Math.pow(value, power)
+    : -1 + (4 - 2 * value) * value;
 }

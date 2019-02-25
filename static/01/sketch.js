@@ -1,6 +1,45 @@
 let Balls = new Array();
 let travelDistace, offset, canvasWidth, canvasWidthHalf, canvasHeight;
 
+class Ball {
+  constructor() {
+    this.dir = true;
+    this.vel = 0;
+
+    this.x = 0;
+    this.y = canvasHeight / 2;
+    this.r = offset / 2;
+    this.duration = 0;
+  }
+
+  display(p, leftCanvas = true) {
+    if (leftCanvas) {
+      p.fill(255);
+      p.ellipse(this.x + offset, this.y, this.r, this.r);
+    } else {
+      p.fill(0);
+      p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
+    }
+  }
+
+  update() {
+    this.x = ease(this.duration / 100) * travelDistance;
+    this.dir ? this.duration++ : this.duration--;
+
+    let scalar =
+      this.duration <= 50
+        ? this.duration / 50
+        : Math.abs(this.duration - 100) / 50;
+    this.r = ((1 + scalar) * offset) / 2;
+
+    if (this.duration >= 100) {
+      this.dir = false;
+    } else if (this.duration < 0) {
+      this.dir = true;
+    }
+  }
+}
+
 let leftSketch = function(p) {
   p.setup = function() {
     const displaySketch = document.getElementById("display-sketch");
@@ -62,45 +101,6 @@ function ease(value, power = 2) {
   return value < 0.5
     ? 2 * Math.pow(value, power)
     : -1 + (4 - 2 * value) * value;
-}
-
-class Ball {
-  constructor() {
-    this.dir = true;
-    this.vel = 0;
-
-    this.x = 0;
-    this.y = canvasHeight / 2;
-    this.r = offset / 2;
-    this.duration = 0;
-  }
-
-  display(p, leftCanvas = true) {
-    if (leftCanvas) {
-      p.fill(255);
-      p.ellipse(this.x + offset, this.y, this.r, this.r);
-    } else {
-      p.fill(0);
-      p.ellipse(this.x - canvasWidthHalf + offset, this.y, this.r, this.r);
-    }
-  }
-
-  update() {
-    this.x = ease(this.duration / 100) * travelDistance;
-    this.dir ? this.duration++ : this.duration--;
-
-    let scalar =
-      this.duration <= 50
-        ? this.duration / 50
-        : Math.abs(this.duration - 100) / 50;
-    this.r = ((1 + scalar) * offset) / 2;
-
-    if (this.duration >= 100) {
-      this.dir = false;
-    } else if (this.duration < 0) {
-      this.dir = true;
-    }
-  }
 }
 
 new p5(leftSketch);
